@@ -1,6 +1,6 @@
 from datetime import datetime
 class Assignment:
-    def __init__(self, id, title, description, deadline, subject, teacher_id, class_id):
+    def __init__(self, id, title, description, deadline, subject, teacher_id, class_id, difficulty=None):
         self.id = id
         self.title = title
         self.description = description
@@ -10,6 +10,7 @@ class Assignment:
         self.class_id = class_id
         self.submissions = {}  # {student_id: content}
         self.grades = {}       # {student_id: grade}
+        self.difficulty = difficulty
 
     def add_submission(self, student_id, content):
         if student_id in self.submissions:
@@ -39,3 +40,9 @@ class Assignment:
             "deadline": self.deadline,
             "status": status
         }
+    
+    def set_difficulty(self, difficulty):
+        if difficulty.lower() in ['easy', 'medium', 'hard']:
+            self.difficulty = difficulty
+            return True
+        return "Invalid difficulty"
