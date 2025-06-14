@@ -6,13 +6,26 @@ class Schedule:
         self.lessons = {}  # {time: {"subject": str, "teacher_id": int}}
 
     def add_lesson(self, time, subject, teacher_id):
-        """Dars qo‘shish"""
-        pass
+        if time in self.lessons:
+            return f"A lesson already exists at {time}."
+        self.lessons[time] = {"subject": subject, "teacher_id": teacher_id}
+        return f"Lesson added at {time}: {subject} (Teacher ID: {teacher_id})"
 
     def view_schedule(self):
-        """Jadvalni ko‘rish"""
-        pass
+        if not self.lessons:
+            return f"No lessons scheduled for {self.day}."
+        sorted_times = sorted(self.lessons.keys())
+        schedule = f"Schedule for {self.day}:\n"
+        for time in sorted_times:
+            lesson = self.lessons[time]
+            schedule += f"  {time}: {lesson['subject']} (Teacher ID: {lesson['teacher_id']})\n"
+        return schedule.strip()
 
     def remove_lesson(self, time):
-        """Darsni o‘chirish"""
-        pass
+        if time in self.lessons:
+            removed = self.lessons.pop(time)
+            return f"Removed lesson at {time}: {removed['subject']}."
+        return f"No lesson found at {time} to remove."
+    
+
+

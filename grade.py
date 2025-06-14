@@ -1,16 +1,28 @@
+from datetime import datetime
 class Grade:
     def __init__(self, id, student_id, subject, value, date, teacher_id):
         self.id = id
         self.student_id = student_id
         self.subject = subject
-        self.value = value  # Expected to be an int between 1–5
+        self.value = value
         self.date = date    # ISO 8601 format string
         self.teacher_id = teacher_id
 
     def update_grade(self, value):
-        """Bahoni yangilash"""
-        pass
+        if 1 <= value <= 5:
+            old_value = self.value
+            self.value = value
+            self.date = datetime.now().date().isoformat()  # Update the date to current
+            return f"Grade updated from {old_value} to {self.value}."
+        else:
+            return "Invalid grade value. Must be between 1 and 5."
 
     def get_grade_info(self):
-        """Baho haqida ma'lumot"""
-        pass
+        return {
+            "grade_id": self.id,
+            "student_id": self.student_id,
+            "subject": self.subject,
+            "grade": self.value,
+            "date": self.date,
+            "teacher_id": self.teacher_id
+        }

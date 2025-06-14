@@ -1,3 +1,4 @@
+from datetime import datetime
 class Assignment:
     def __init__(self, id, title, description, deadline, subject, teacher_id, class_id):
         self.id = id
@@ -11,13 +12,30 @@ class Assignment:
         self.grades = {}       # {student_id: grade}
 
     def add_submission(self, student_id, content):
-        """O‘quvchi javobini qo‘shish"""
-        pass
+        if student_id in self.submissions:
+            return f"Submission already exists for student {student_id}."
+        self.submissions[student_id] = content
+        return f"Submission received from student {student_id}."
 
     def set_grade(self, student_id, grade):
-        """Baho qo‘yish"""
-        pass
+        if student_id not in self.submissions:
+            return f"No submission found for student {student_id}."
+        self.grades[student_id] = grade
+        return f"Grade {grade} set for student {student_id}."
 
     def get_status(self):
-        """Vazifa holatini ko‘rish"""
-        pass
+        total = len(self.submissions)
+        graded = len(self.grades)
+        ungraded = total - graded
+        deadline_obj = datetime.fromisoformat(self.deadline)
+        status = "Open" if datetime.now() < deadline_obj else "Closed"
+        return {
+            "assignment_id": self.id,
+            "title": self.title,
+            "subject": self.subject,
+            "total_submissions": total,
+            "graded": graded,
+            "ungraded": ungraded,
+            "deadline": self.deadline,
+            "status": status
+        }
