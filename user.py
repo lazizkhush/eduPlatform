@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 
 class AbstractRole(ABC):
-
     def __init__(self, id, full_name, email, password_hash, created_at):
         self._id = id
         self._full_name = full_name
@@ -12,7 +11,8 @@ class AbstractRole(ABC):
     @abstractmethod
     def get_profile():
         pass
-
+    
+    @abstractmethod
     def update_profile():
         pass
 
