@@ -1,4 +1,4 @@
-from .admin import all_users
+from admin import all_users
 
 class Notification:
     def __init__(self, id, message, recipient_id, created_at):

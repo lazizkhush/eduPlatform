@@ -1,4 +1,4 @@
-from .user import User
+from user import User
 
 class Parent(User):
     def __init__(self, id, full_name, email, password_hash, created_at, role, notifications, children=None):

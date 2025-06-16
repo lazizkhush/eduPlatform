@@ -1,4 +1,4 @@
-from .user import User
+from user import User
 
 all_users = []  # Global list of all User objects
 

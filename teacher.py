@@ -1,5 +1,5 @@
-from .user import User
-from .assignment import Assignment
+from user import User
+from assignment import Assignment
 
 class Teacher(User):
     def __init__(self, id, full_name, email, password_hash, created_at, role, notifications, subjects, classes, assignments):
